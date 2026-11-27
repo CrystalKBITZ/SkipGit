@@ -1,20 +1,20 @@
 # SkipGit
 
-纯 Java 实现的桌面 Git 客户端 —— 内置 Git 与 Git LFS 引擎，**不依赖系统里安装的 git / git-lfs**。
+**纯 Java 构建的跨平台桌面 Git 客户端**。Git 与 Git LFS 引擎全部内置，不依赖系统 `git` / `git-lfs`，开箱即用。
 
-界面是 macOS 风格的无边框窗口：圆角、投影、磨砂玻璃质感、柔光流动背景，所有交互都带缓动动画。
+界面采用 macOS 风格的无边框设计：圆角、投影、磨砂玻璃质感与柔光流动背景，全部交互带缓动动画。
 
 ---
 
-## 为什么做它
+## 设计取向
 
 系统自带 git 要在命令行敲一堆命令；现成的 GUI 客户端要么依赖命令行 git，要么只支持 GitHub 一家。
 
 SkipGit 的目标是：**新手拖个文件进来就能提交上传，老手该有的操作一个不少**。
 
-- 引擎全在进程内（JGit + 自研 LFS 客户端），不需要 `git.exe`
-- 一个界面管理 6 个平台：GitHub / GitLab / Gitee / Bitbucket / Codeberg / Gitea
-- 讲中文，报错也是中文（会把 `non-fast-forward` 翻译成「先拉取再推送」）
+- 引擎完全进程内运行（JGit + 自研 LFS 客户端），无需外部二进制
+- 单一界面统一管理 6 个托管平台：GitHub、GitLab、Gitee、Bitbucket、Codeberg、Gitea
+- 错误信息本地化：`non-fast-forward` 会翻译成「请先拉取再推送」这类可执行建议
 
 ---
 
@@ -80,19 +80,25 @@ SkipGit 的目标是：**新手拖个文件进来就能提交上传，老手该�
 
 ---
 
-## 截图
+## 界面预览
 
-> 截图来自开发过程中的版本，最新界面（含 AI 助手、按块暂存）请运行查看。
+<p align="center">
+  <img src="shot-changes.png" width="90%" alt="变更页：暂存、提交、一键上传">
+</p>
 
-| 变更页 | 文件浏览 |
-| --- | --- |
-| ![changes](changes-final2.png) | ![files](files-view.png) |
+<p align="center"><i>变更页 —— 未暂存 / 已暂存分列、diff 预览、一键上传</i></p>
 
-| 远程与多平台 | 新建仓库 |
-| --- | --- |
-| ![remote](remote-tools.png) | ![create](create-repo-ui.png) |
+<p align="center">
+  <img src="shot-assistant.png" width="90%" alt="AI 助手：能操作软件，也能解答用法">
+</p>
 
----
+<p align="center"><i>AI 助手 —— 说一句话直接执行，也能问怎么用</i></p>
+
+<p align="center">
+  <img src="shot-remote.png" width="90%" alt="远程与同步：六平台统一管理">
+</p>
+
+<p align="center"><i>远程与同步 —— origin 管理、跨平台镜像</i></p>
 
 ## 运行要求
 
