@@ -36,7 +36,6 @@ SkipGit 是一个完全用 Java 实现的桌面 Git 客户端。它把 Git 引�
 ### 变更与提交
 - 未暂存与已暂存分列展示，支持文本 diff 预览
 - 单文件暂存、全部暂存、丢弃未暂存改动
-- **按块暂存**：仅将文件中的部分改动写入索引，等价于 `git add -p`
 - **一键上传**：暂存 → 提交 → 推送合并为一个动作
 - 提交说明留空时自动生成 `chore: 更新 MM-dd HH:mm`
 
@@ -177,7 +176,6 @@ java --module-path build/lib/fx --add-modules javafx.controls \
 
 - **多平台统一抽象**：`HostClient` 定义建仓、改仓库信息、云端文件读写等能力，五个平台各自实现，界面层只面对接口
 - **云端文件读写抽象**：`listCloud` / `readCloudFile` / `writeCloudFile` 三个方法覆盖六平台，通过 `origin` 地址自动路由
-- **按块暂存**：JGit 未提供等价 API，实现方式是用 `DiffAlgorithm` 计算 hunk，按选中项合并出中间内容，再以 `DirCacheEditor` 写入索引，工作区保持不变
 - **启动时序**：主界面先构建并显示，背景图与远端状态延后 120 ms 加载，避免图片解码阻塞首帧
 
 ## 技术栈
@@ -211,7 +209,7 @@ src/main/java/com/skipgit/
 └── ui/                   界面层
     ├── GlassWindow       无边框毛玻璃窗口
     ├── MainView          主框架与页面路由
-    ├── ChangesView       变更页（冲突处理、按块暂存）
+    ├── ChangesView       变更页（冲突处理）
     ├── HistoryView       历史页（拓扑、检索、回退）
     ├── RemoteView        远端与跨平台同步
     ├── AssistantView     AI 助手
@@ -226,6 +224,7 @@ src/main/java/com/skipgit/
 - 仅在 Windows 10 / 11 上验证，其他平台未测试
 - 尚不支持 SSH 密钥认证，仅支持 HTTPS + 访问令牌
 - 同一平台当前只保留一个账号凭据
+- **按块暂存（`git add -p`）尚未可用**：实测写入索引会导致 `.git/index` 损坏，入口已隐藏，待修复
 - `--shot` 离屏截图在部分显卡环境下会挂起，无法产出文件
 - 暂未提供独立安装包，需要自行构建或用 `run.bat` 启动
 
