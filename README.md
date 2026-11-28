@@ -148,11 +148,19 @@ java --module-path build/lib/fx --add-modules javafx.controls \
 
 ### 启动参数
 
+> 参数必须用**等号**形式（JavaFX 的 `getParameters().getNamed()` 只解析 `--key=value`），写成空格分隔会被忽略。
+
 | 参数 | 说明 |
 | --- | --- |
-| `--repo <path>` | 启动时直接打开指定仓库 |
-| `--page <name>` | 启动后切换到指定页面：`changes` / `files` / `history` / `branches` / `remote` / `assistant` |
-| `--shot <file>` | 渲染一帧并保存为 PNG |
+| `--repo=<path>` | 启动时直接打开指定仓库 |
+| `--page=<name>` | 启动后切换到指定页面：`changes` / `files` / `history` / `branches` / `remote` / `assistant` |
+| `--shot=<file>` | 渲染一帧并保存为 PNG（约 2.6 秒后触发；配合 `--page=` 可截任意页面） |
+
+示例：截图 AI 助手页面
+
+```bash
+java ... com.skipgit.Launcher --page=assistant --shot=assistant.png
+```
 
 ---
 
@@ -225,7 +233,6 @@ src/main/java/com/skipgit/
 - 尚不支持 SSH 密钥认证，仅支持 HTTPS + 访问令牌
 - 同一平台当前只保留一个账号凭据
 - **按块暂存（`git add -p`）尚未可用**：实测写入索引会导致 `.git/index` 损坏，入口已隐藏，待修复
-- `--shot` 离屏截图在部分显卡环境下会挂起，无法产出文件
 - 暂未提供独立安装包，需要自行构建或用 `run.bat` 启动
 
 ## 常见问题
